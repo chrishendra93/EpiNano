@@ -2,6 +2,7 @@
 import os
 from collections import defaultdict
 from collections import OrderedDict
+from tqdm import tqdm
 from multiprocessing import Pool
 from glob import glob
 import pandas as pd
@@ -50,5 +51,5 @@ if __name__ == '__main__':
         os.mkdir(out_dir)
 
     with Pool(8) as p:
-        for _ in p.imap(save_contig, tasks):
+        for _ in tqdm(p.imap_unordered(save_contig, tasks), total=len(tasks)):
             pass
