@@ -32,12 +32,16 @@ from time import time
 
 def save_contig(task):
     fpath, out_dir = task
-    for tx, df in (pd.read_csv(fpath, header=None).groupby(0)):
-        save_dir = os.path.join(out_dir, tx)
-        if not os.path.exists(save_dir):
-            os.mkdir(save_dir)
-        fpath = os.path.join(save_dir, "{}.csv".format(time()))
-        df.to_csv(fpath, index=False)
+    freq_df = pd.read_csv(fpath, header=None)
+    if len(freq_df) == 0:
+        return
+    else:
+        for tx, df in freq_df.groupby(0):
+            save_dir = os.path.join(out_dir, tx)
+            if not os.path.exists(save_dir):
+                os.mkdir(save_dir)
+            fpath = os.path.join(save_dir, "{}.csv".format(time()))
+            df.to_csv(fpath, index=False)
 
 
 if __name__ == '__main__':
