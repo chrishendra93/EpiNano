@@ -7,7 +7,7 @@ import numpy as np
 #cc6m_2244_T7_ecorv,40,T,6.0,0,0,0,11:7:3:11:11:7
 #ref,ref_pos,ref_base,depth,mis,ins,del,Qs
 mem = defaultdict(lambda: defaultdict(list))
-ks = OrderedDict() 
+ks = OrderedDict()
 for l in fin.input():
     ary = l.strip().split(',')
     k = ','.join(ary[:3])
@@ -23,4 +23,4 @@ for k in ks:
     cov = mem[k]['var'][0]
     q_lst = mem[k]['q']
     print ",".join ([k, str(cov),  ",".join (map (str, ['%0.3f' % np.mean(q_lst),'%0.3f'%np.median(q_lst),'%0.3f'%np.std(q_lst)])), ",".join (map (str, ['%0.3f'% x for x in list (mem[k]['var'])[1:]/cov] ))] )
-    
+
