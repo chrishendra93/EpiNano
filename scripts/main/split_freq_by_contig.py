@@ -35,7 +35,7 @@ def save_contig(task):
     try:
         freq_df = pd.read_csv(fpath, header=None)
     except Exception:
-        continue
+        return
     if len(freq_df) == 0:
         return
     else:
