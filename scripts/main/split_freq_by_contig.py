@@ -32,7 +32,10 @@ from time import time
 
 def save_contig(task):
     fpath, out_dir = task
-    freq_df = pd.read_csv(fpath, header=None)
+    try:
+        freq_df = pd.read_csv(fpath, header=None)
+    except Exception:
+        raise ValueError("Error at {}".format(fpath))
     if len(freq_df) == 0:
         return
     else:
